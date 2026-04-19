@@ -62,4 +62,18 @@ public class GlobalExceptionHandler {
                 null
         );
     }
+    @ExceptionHandler(UnauthorizedException.class)
+    public ApiError handleUnauthorizedException(
+            UnauthorizedException ex,
+            HttpServletRequest request
+    ) {
+        return new ApiError(
+                LocalDateTime.now(),
+                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.UNAUTHORIZED.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI(),
+                null
+        );
+    }
 }
