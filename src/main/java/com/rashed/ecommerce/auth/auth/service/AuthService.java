@@ -18,12 +18,13 @@ public class AuthService {
 
     public RegisterResponse register(RegisterRequest request) {
         String email = request.email();
-        if (userRepository.existsByEmailIgnoreCase(email)) {
+        String normalizedEmail=email.trim().toLowerCase();
+        if (userRepository.existsByEmailIgnoreCase(normalizedEmail)) {
             throw new ConflictException("Email already exists");
         }
         User user = User.builder()
-                .name(request.name())
-                .email(email)
+                .name(request.name().trim())
+                .email(normalizedEmail)
                 .password(passwordEncoder.encode(request.password()))
                 .role(Role.CUSTOMER)
                 .build();
