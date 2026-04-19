@@ -1,9 +1,6 @@
 package com.rashed.ecommerce.auth.auth.service;
 
-import com.rashed.ecommerce.auth.auth.dto.LoginRequest;
-import com.rashed.ecommerce.auth.auth.dto.LoginResponse;
-import com.rashed.ecommerce.auth.auth.dto.RegisterRequest;
-import com.rashed.ecommerce.auth.auth.dto.RegisterResponse;
+import com.rashed.ecommerce.auth.auth.dto.*;
 import com.rashed.ecommerce.auth.common.exception.ConflictException;
 import com.rashed.ecommerce.auth.common.exception.UnauthorizedException;
 import com.rashed.ecommerce.auth.security.jwt.JwtService;
@@ -61,6 +58,16 @@ public class AuthService {
                 user.getName(),
                 accessToken,
                 "Bearer"
+        );
+    }
+
+    public MeResponse me(User currentUser) {
+        return new MeResponse(
+                currentUser.getId(),
+                currentUser.getName(),
+                currentUser.getEmail(),
+                currentUser.getRole(),
+                currentUser.getCreatedAt()
         );
     }
 

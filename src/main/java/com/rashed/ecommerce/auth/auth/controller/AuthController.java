@@ -1,13 +1,12 @@
 package com.rashed.ecommerce.auth.auth.controller;
 
-import com.rashed.ecommerce.auth.auth.dto.LoginRequest;
-import com.rashed.ecommerce.auth.auth.dto.LoginResponse;
-import com.rashed.ecommerce.auth.auth.dto.RegisterRequest;
-import com.rashed.ecommerce.auth.auth.dto.RegisterResponse;
+import com.rashed.ecommerce.auth.auth.dto.*;
 import com.rashed.ecommerce.auth.auth.service.AuthService;
+import com.rashed.ecommerce.auth.user.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,5 +26,8 @@ public class AuthController {
     public LoginResponse login(@Valid @RequestBody LoginRequest request) {
         return authService.login(request);
     }
-
+    @GetMapping("/me")
+    public MeResponse me(@AuthenticationPrincipal User currentUser) {
+        return authService.me(currentUser);
+    }
 }
