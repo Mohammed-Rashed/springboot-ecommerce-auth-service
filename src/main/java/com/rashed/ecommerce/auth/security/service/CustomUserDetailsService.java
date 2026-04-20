@@ -1,6 +1,6 @@
 package com.rashed.ecommerce.auth.security.service;
 
-import com.rashed.ecommerce.auth.user.UserRepository;
+import com.rashed.ecommerce.auth.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

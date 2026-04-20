@@ -2,7 +2,7 @@ package com.rashed.ecommerce.auth.auth.controller;
 
 import com.rashed.ecommerce.auth.auth.dto.*;
 import com.rashed.ecommerce.auth.auth.service.AuthService;
-import com.rashed.ecommerce.auth.user.User;
+import com.rashed.ecommerce.auth.user.entity.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

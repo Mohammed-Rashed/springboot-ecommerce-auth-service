@@ -1,6 +1,6 @@
 package com.rashed.ecommerce.auth.auth.dto;
 
-import com.rashed.ecommerce.auth.user.Role;
+import com.rashed.ecommerce.auth.user.entity.Role;
 
 import java.time.LocalDateTime;
 

@@ -1,6 +1,6 @@
 package com.rashed.ecommerce.auth.security.jwt;
 
-import com.rashed.ecommerce.auth.user.User;
+import com.rashed.ecommerce.auth.user.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

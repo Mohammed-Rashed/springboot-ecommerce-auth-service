@@ -1,4 +1,4 @@
-package com.rashed.ecommerce.auth.user;
+package com.rashed.ecommerce.auth.user.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
