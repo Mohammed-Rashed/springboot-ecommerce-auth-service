@@ -87,4 +87,10 @@ public class AuthService {
         );
     }
 
+    public void logout(LogoutRequest request) {
+        RefreshToken refreshToken = refreshTokenService.findByToken(request.refreshToken());
+        refreshToken.setRevoked(true);
+        refreshTokenService.revokeRefreshToken(refreshToken);
+        return ;
+    }
 }
