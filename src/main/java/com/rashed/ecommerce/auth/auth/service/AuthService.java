@@ -3,6 +3,8 @@ package com.rashed.ecommerce.auth.auth.service;
 import com.rashed.ecommerce.auth.auth.dto.*;
 import com.rashed.ecommerce.auth.common.exception.ConflictException;
 import com.rashed.ecommerce.auth.common.exception.UnauthorizedException;
+import com.rashed.ecommerce.auth.refreshtoken.entity.RefreshToken;
+import com.rashed.ecommerce.auth.refreshtoken.service.RefreshTokenService;
 import com.rashed.ecommerce.auth.security.jwt.JwtService;
 import com.rashed.ecommerce.auth.user.entity.Role;
 import com.rashed.ecommerce.auth.user.entity.User;
@@ -17,6 +19,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
 
     public RegisterResponse register(RegisterRequest request) {
         String email = request.email();
@@ -52,12 +55,13 @@ public class AuthService {
         }
 
         String accessToken = jwtService.generateAccessToken(user);
-
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
         return new LoginResponse(
                 user.getEmail(),
                 user.getName(),
                 accessToken,
-                "Bearer"
+                "Bearer",
+                refreshToken.getToken()
         );
     }
 
