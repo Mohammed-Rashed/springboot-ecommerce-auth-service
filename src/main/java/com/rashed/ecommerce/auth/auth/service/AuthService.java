@@ -75,4 +75,16 @@ public class AuthService {
         );
     }
 
+    public RefreshTokenResponse refreshToken(RefreshTokenRequest request) {
+        RefreshToken refreshToken = refreshTokenService.verfiyExpiration(request);
+        User user = refreshToken.getUser();
+
+        String accessToken = jwtService.generateAccessToken(user);
+
+        return new RefreshTokenResponse(
+                accessToken,
+                "Bearer"
+        );
+    }
+
 }

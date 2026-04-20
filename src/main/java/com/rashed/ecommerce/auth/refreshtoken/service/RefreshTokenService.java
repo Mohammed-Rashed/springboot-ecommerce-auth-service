@@ -1,5 +1,7 @@
 package com.rashed.ecommerce.auth.refreshtoken.service;
 
+import com.rashed.ecommerce.auth.auth.dto.RefreshTokenRequest;
+import com.rashed.ecommerce.auth.common.exception.UnauthorizedException;
 import com.rashed.ecommerce.auth.refreshtoken.entity.RefreshToken;
 import com.rashed.ecommerce.auth.refreshtoken.repository.RefreshTokenRepository;
 import com.rashed.ecommerce.auth.user.entity.User;
@@ -33,5 +35,14 @@ public class RefreshTokenService {
     public RefreshToken findByToken(String token) {
         return refreshTokenRepository.findByToken(token)
                 .orElseThrow(() -> new RuntimeException("Invalid refresh token"));
+    }
+
+    public RefreshToken verfiyExpiration(RefreshTokenRequest token) {
+        RefreshToken refreshToken = findByToken(token.refreshToken());
+        if (refreshToken.getExpiresAt().isBefore(LocalDateTime.now()) || refreshToken.isRevoked()) {
+            refreshTokenRepository.delete(refreshToken);
+            throw new UnauthorizedException("Refresh token has expired or revoked. Please login again.");
+        }
+        return refreshToken;
     }
 }

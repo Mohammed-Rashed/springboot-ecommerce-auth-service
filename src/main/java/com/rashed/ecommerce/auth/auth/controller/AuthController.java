@@ -30,4 +30,9 @@ public class AuthController {
     public MeResponse me(@AuthenticationPrincipal User currentUser) {
         return authService.me(currentUser);
     }
+
+    @PostMapping("/refresh-token")
+    public RefreshTokenResponse login(@Valid @RequestBody RefreshTokenRequest request) {
+        return authService.refreshToken(request);
+    }
 }
